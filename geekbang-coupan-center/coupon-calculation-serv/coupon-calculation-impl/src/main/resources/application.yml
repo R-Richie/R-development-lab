@@ -1,45 +1,20 @@
+# 项目的启动端口
 server:
-  port: 20002
-  # 在返回给页面的结果里，把错误信息添加到message里
-  error:
-    include-message: always
-
+  port: 20001
+#  servlet:
+#    context-path: /coupon-template
 
 spring:
   application:
-    name: coupon-customer-serv
-  datasource:
-    # mysql数据源
-    username: root
-    password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/geekbang_coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    # 连接池
-    hikari:
-      pool-name: GeekbangCouponHikari
-      connection-timeout: 5000
-      idle-timeout: 30000
-      maximum-pool-size: 10
-      minimum-idle: 5
-      max-lifetime: 60000
-      auto-commit: true
-  jpa:
-    show-sql: true
-    hibernate:
-      # 在生产环境全部为none，防止ddl结构被自动执行
-      ddl-auto: none
-    properties:
-      hibernate.show_sql: true
-      hibernate.format_sql: true
-    open-in-view: false
+    # 定义项目名称
+    name: coupon-calculation-serv
   cloud:
     nacos:
       discovery:
-        # Nacos的服务注册地址，可以配置多个，逗号分隔
+        # 可以配置多个，逗号分隔
         server-addr: localhost:8848
-        # 服务注册到Nacos上的名称，一般不用配置
-        service: coupon-customer-serv
+        # 默认就是application name，一般不用配置
+        service: coupon-calculation-serv
         # nacos客户端向服务端发送心跳的时间间隔，时间单位其实是ms
         heart-beat-interval: 5000
         # 服务端没有接受到客户端心跳请求就将其设为不健康的时间间隔，默认为15s
@@ -68,7 +43,22 @@ spring:
         watch:
           enabled: true
         watch-delay: 30000
+#  redis:
+#    database: 0
+#    host: localhost
+#    port: 6379
+#    # password:
+#    # 连接超时时间
+#    timeout: 10000
 
 logging:
   level:
     com.broadview.coupon: debug
+
+# 开启所有management端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

@@ -1,13 +1,13 @@
+# 项目的启动端口
 server:
-  port: 20002
-  # 在返回给页面的结果里，把错误信息添加到message里
+  port: 20000
   error:
     include-message: always
 
-
 spring:
   application:
-    name: coupon-customer-serv
+    # 定义项目名称
+    name: coupon-template-serv
   datasource:
     # mysql数据源
     username: root
@@ -30,21 +30,21 @@ spring:
       # 在生产环境全部为none，防止ddl结构被自动执行
       ddl-auto: none
     properties:
-      hibernate.show_sql: true
       hibernate.format_sql: true
+      hibernate.show_sql: true
     open-in-view: false
   cloud:
     nacos:
       discovery:
-        # Nacos的服务注册地址，可以配置多个，逗号分隔
+        # 可以配置多个，逗号分隔
         server-addr: localhost:8848
-        # 服务注册到Nacos上的名称，一般不用配置
-        service: coupon-customer-serv
+        # 默认就是application name，一般不用配置
+        service: coupon-template-serv
         # nacos客户端向服务端发送心跳的时间间隔，时间单位其实是ms
         heart-beat-interval: 5000
         # 服务端没有接受到客户端心跳请求就将其设为不健康的时间间隔，默认为15s
         # 注：推荐值该值为15s即可，如果有的业务线希望服务下线或者出故障时希望尽快被发现，可以适当减少该值
-        heart-beat-timeout: 20000
+        heart-beat-timeout: 15000
         # [注意] 这个IP地址如果更换网络后变化，会导致服务调用失败，建议先不要设置
         # ip: 172.20.7.228
         # 元数据部分 - 可以自己随便定制
