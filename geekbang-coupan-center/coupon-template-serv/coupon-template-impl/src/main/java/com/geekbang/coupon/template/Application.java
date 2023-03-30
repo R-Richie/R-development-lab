@@ -1,4 +1,4 @@
-package com.geekbang;
+package com.geekbang.coupon.template;
 
 
 import org.springframework.boot.SpringApplication;
