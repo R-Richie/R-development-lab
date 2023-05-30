@@ -17,10 +17,22 @@ public class JacksonUtils {
     public static JacksonUtils getInstance(){return INSTANCE;}
     public static ObjectMapper getJson(){return JacksonUtils.JACKSON;}
     public String toJson(final Object object) throws JsonProcessingException{
-        return JACKSON.writeValueAsString(object);
+        String s = "";
+        try{
+            s = JACKSON.writeValueAsString(object);
+        }catch ( JsonProcessingException e){
+            throw new RuntimeException("to json error",e);
+        }
+        return s;
     }
-    public <T> T fromJson(final String json, final Class<T> tClass) throws  JsonProcessingException{
-        return JACKSON.readValue(json, tClass);
+    public <T> T fromJson(final String json, final Class<T> tClass){
+        T t = null;
+        try{
+            t = JACKSON.readValue(json, tClass);
+        }catch (JsonProcessingException e){
+            throw new RuntimeException("json error", e);
+        }
+        return t;
     }
 
     public <T> T fromJson(final JsonNode jsonNode, final Class<T> tClass) throws IOException{

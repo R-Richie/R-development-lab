@@ -1,9 +1,10 @@
-package com.R.sae.gateway.syncdata;
+package com.R.sae.gateway.syncdata.nacos;
 
 import com.R.sae.gateway.dynamic.GatewayInMemoryService;
+import com.R.sae.gateway.syncdata.RouteDataSubscriber;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 
-public class InMemoryRouteDataSubscriber implements RouteDataSubscriber{
+public class InMemoryRouteDataSubscriber implements RouteDataSubscriber {
     private final GatewayInMemoryService gatewayInMemoryService;
 
     public InMemoryRouteDataSubscriber(GatewayInMemoryService gatewayInMemoryService) {

@@ -1,4 +1,4 @@
-package com.R.sae.gateway;
+package com.R.sae.gateway.constant;
 
 public class NacosPathConstants {
 
