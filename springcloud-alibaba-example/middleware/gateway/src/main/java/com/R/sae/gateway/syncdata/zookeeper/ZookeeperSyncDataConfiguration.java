@@ -1,8 +1,11 @@
 package com.R.sae.gateway.syncdata.zookeeper;
 
+import com.R.sae.gateway.dynamic.GatewayInMemoryService;
 import com.R.sae.gateway.syncdata.AuthDataSubscriber;
 import com.R.sae.gateway.syncdata.RouteDataSubscriber;
+import com.R.sae.gateway.syncdata.SignAuthDataSubscriber;
 import com.R.sae.gateway.syncdata.SyncDataService;
+import com.R.sae.gateway.syncdata.nacos.InMemoryRouteDataSubscriber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -47,5 +50,13 @@ public class ZookeeperSyncDataConfiguration {
         ZookeeperClient client = new ZookeeperClient(zkConfig);
         client.start();
         return client;
+    }
+    @Bean
+    public AuthDataSubscriber signAuthDataSubscriber(){
+        return new SignAuthDataSubscriber();
+    }
+    @Bean
+    public RouteDataSubscriber inMemoryDataSubscriber(final ObjectProvider<GatewayInMemoryService> gatewayInMemoryServices){
+        return new InMemoryRouteDataSubscriber(gatewayInMemoryServices.getIfAvailable());
     }
 }
