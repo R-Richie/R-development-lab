@@ -1,2 +1,3 @@
+# 忽略文件或目录名
 /middleware/gateway/target/
 /middleware/gateway-admin/target/
