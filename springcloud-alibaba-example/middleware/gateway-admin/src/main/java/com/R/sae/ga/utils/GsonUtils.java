@@ -17,6 +17,7 @@
 
 package com.R.sae.ga.utils;
 
+import com.R.sae.ga.constants.Constants;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -25,8 +26,6 @@ import com.google.gson.stream.JsonWriter;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.shenyu.common.constant.Constants;
-import org.apache.shenyu.common.exception.ShenyuException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
