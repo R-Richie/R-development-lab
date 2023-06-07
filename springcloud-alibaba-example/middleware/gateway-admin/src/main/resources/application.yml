@@ -17,8 +17,8 @@ spring:
 #    com.broadview.coupon: debug
 
 # 开启所有management端点
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

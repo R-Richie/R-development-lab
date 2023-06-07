@@ -5,7 +5,7 @@ import com.R.sae.gateway.syncdata.AuthDataSubscriber;
 import com.R.sae.gateway.syncdata.RouteDataSubscriber;
 import com.R.sae.gateway.syncdata.SignAuthDataSubscriber;
 import com.R.sae.gateway.syncdata.SyncDataService;
-import com.R.sae.gateway.syncdata.nacos.InMemoryRouteDataSubscriber;
+import com.R.sae.gateway.syncdata.InMemoryRouteDataSubscriber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

@@ -17,19 +17,28 @@
 
 package com.R.sae.ga.controller;
 
+import com.R.sae.ga.enums.ConfigGroupEnum;
 import com.R.sae.ga.listener.http.HttpLongPollingDataChangedListener;
+import com.R.sae.ga.model.dto.AdminResult;
+import com.R.sae.ga.model.dto.ConfigData;
+import com.R.sae.ga.utils.AdminResultMessage;
+import com.R.sae.ga.utils.CommonErrorCode;
+import com.google.common.collect.Maps;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 /**
  * This Controller only when HttpLongPollingDataChangedListener exist, will take effect.
  */
-@ConditionalOnBean(HttpLongPollingDataChangedListener.class)
+//@ConditionalOnBean(HttpLongPollingDataChangedListener.class)
 @RestController
 @RequestMapping("/configs")
 public class ConfigController {
@@ -46,15 +55,15 @@ public class ConfigController {
      * @param groupKeys the group keys
      * @return the shenyu result
      */
-//    @GetMapping("/fetch")
-//    public ShenyuAdminResult fetchConfigs(@NotNull final String[] groupKeys) {
-//        Map<String, ConfigData<?>> result = Maps.newHashMap();
-//        for (String groupKey : groupKeys) {
-//            ConfigData<?> data = longPollingListener.fetchConfig(ConfigGroupEnum.valueOf(groupKey));
-//            result.put(groupKey, data);
-//        }
-//        return ShenyuAdminResult.success(ShenyuResultMessage.SUCCESS, result);
-//    }
+    @GetMapping("/fetch")
+    public AdminResult fetchConfigs(@NotNull final String[] groupKeys) {
+        Map<String, ConfigData<?>> result = Maps.newHashMap();
+        for (String groupKey : groupKeys) {
+            ConfigData<?> data = longPollingListener.fetchConfig(ConfigGroupEnum.valueOf(groupKey));
+            result.put(groupKey, data);
+        }
+        return new AdminResult(CommonErrorCode.SUCCESSFUL, AdminResultMessage.SUCCESS, result);
+    }
     
     /**
      * Listener.
@@ -65,7 +74,6 @@ public class ConfigController {
     @PostMapping(value = "/listener")
     public void listener(final HttpServletRequest request, final HttpServletResponse response) {
         longPollingListener.doLongPolling(request, response);
-
     }
     
 }
