@@ -55,6 +55,21 @@ public class HttpLongPollingDataChangedListener extends AbstractDataChangedListe
         this.httpSyncProperties = httpSyncProperties;
     }
 
+    @Override
+    protected void afterInitialize() {
+        long syncInterval = httpSyncProperties.getRefreshInterval().toMillis();
+        // Periodically check the data for changes and update the cache
+        scheduler.scheduleWithFixedDelay(() -> {
+            log.info("http sync strategy refresh config start.");
+            try {
+                super.refreshLocalCache();
+                log.info("http sync strategy refresh config success.");
+            } catch (Exception e) {
+                log.error("http sync strategy refresh config error!", e);
+            }
+        }, syncInterval, syncInterval, TimeUnit.MILLISECONDS);
+        log.info("http sync strategy refresh interval: {}ms", syncInterval);
+    }
     /**
      * If the configuration data changes, the group information for the change is immediately responded.
      * Otherwise, the client's request thread is blocked until any data changes or the specified timeout is reached.

@@ -38,7 +38,7 @@ import java.util.Map;
 /**
  * This Controller only when HttpLongPollingDataChangedListener exist, will take effect.
  */
-//@ConditionalOnBean(HttpLongPollingDataChangedListener.class)
+@ConditionalOnBean(HttpLongPollingDataChangedListener.class)
 @RestController
 @RequestMapping("/configs")
 public class ConfigController {

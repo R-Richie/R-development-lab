@@ -22,3 +22,8 @@ management:
     web:
       exposure:
         include: "*"
+
+gw:
+  sync:
+    http:
+      enabled: true

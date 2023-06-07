@@ -11,6 +11,7 @@ import com.R.sae.ga.utils.GsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.concurrent.ConcurrentMap;
 import static com.R.sae.ga.enums.ConfigGroupEnum.ROUTE;
 
 @Slf4j
-public abstract class AbstractDataChangedListener implements DataChangedListener {
+public abstract class AbstractDataChangedListener implements DataChangedListener, InitializingBean {
     /**
      * The constant CACHE.
      */
@@ -48,6 +49,14 @@ public abstract class AbstractDataChangedListener implements DataChangedListener
     }
 
     @Override
+    public void afterPropertiesSet() throws Exception {
+        this.refreshLocalCache();
+        this.afterInitialize();
+    }
+
+    protected abstract void afterInitialize();
+
+    @Override
     public void onAppAuthChanged(List<AppAuthData> changed, DataEventTypeEnum eventType) {
         if (CollectionUtils.isEmpty(changed)) {
             return;
@@ -57,7 +66,7 @@ public abstract class AbstractDataChangedListener implements DataChangedListener
     }
     protected void updateAppAuthCache() {
         //todo listAll Method
-        this.updateCache(ConfigGroupEnum.APP_AUTH, null);
+        this.updateCache(ConfigGroupEnum.APP_AUTH, appAuthService.listAll());
 //                appAuthService.listAll());
     }
     /**
@@ -92,8 +101,7 @@ public abstract class AbstractDataChangedListener implements DataChangedListener
 
     protected void updateRouteCache() {
         //todo listAll Method
-        this.updateCache(ROUTE, null);
-//                appAuthService.listAll());
+        this.updateCache(ROUTE, routeService.listAll());
     }
 
     /**
