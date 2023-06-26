@@ -14,7 +14,7 @@ public class Reactor implements Runnable{
     final Selector selector;
     final ServerSocketChannel serverSocket;
 
-    Reactor(int port) throws IOException{
+    public Reactor(int port) throws IOException{
         selector = Selector.open();
         serverSocket = ServerSocketChannel.open();
         serverSocket.socket().bind(new InetSocketAddress(port));
