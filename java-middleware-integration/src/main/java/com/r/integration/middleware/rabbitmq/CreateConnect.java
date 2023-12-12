@@ -1,4 +1,4 @@
-package com.r.middleware.rabbitmq;
+package com.r.integration.middleware.rabbitmq;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

@@ -1,4 +1,4 @@
-package com.r.unit;
+package com.r.integration.unit;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
