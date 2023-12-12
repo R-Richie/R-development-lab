@@ -1,4 +1,4 @@
-package com.R.we.hello;
+package com.r.we.hello;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

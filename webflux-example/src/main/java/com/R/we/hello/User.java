@@ -1,4 +1,4 @@
-package com.R.we.hello;
+package com.r.we.hello;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

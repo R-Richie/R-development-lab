@@ -1,4 +1,4 @@
-package com.R.we.hello;
+package com.r.we.hello;
 
 public class Greeting {
     private String message;

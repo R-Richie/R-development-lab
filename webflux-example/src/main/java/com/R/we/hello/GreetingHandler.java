@@ -1,4 +1,4 @@
-package com.R.we.hello;
+package com.r.we.hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
