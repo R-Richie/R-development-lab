@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-public class middlewareIntegrationApplication {
+public class MiddlewareIntegrationApplication {
 
     @RequestMapping("/")
     String home() {
@@ -15,7 +15,7 @@ public class middlewareIntegrationApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(middlewareIntegrationApplication.class, args);
+        SpringApplication.run(MiddlewareIntegrationApplication.class, args);
     }
 
 }

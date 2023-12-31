@@ -2,6 +2,9 @@ package com.r.sae.ga.model.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.cloud.gateway.filter.FilterDefinition;
+import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
+
 
 import java.net.URI;
 import java.util.List;
