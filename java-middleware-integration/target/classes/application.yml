@@ -1,0 +1,38 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        #httptrace,loggers,health,info,metrics,instances
+  endpoint:
+    loggers:
+      enabled: true
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+
+
+spring:
+    application:
+      name: spring-boot-management
+    security:
+      user:
+        name: client
+        password: client
+
+    boot:
+      admin:
+        client:
+          url: http://localhost:8080
+          username: admin
+          password: admin
+          instance:
+            metadata:
+              user:
+                name: ${spring.security.user.name}
+                password: ${spring.security.user.password}
+server:
+    port: 8081
+
