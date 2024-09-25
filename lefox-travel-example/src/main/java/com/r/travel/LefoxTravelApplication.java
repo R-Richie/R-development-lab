@@ -1,4 +1,4 @@
-package com.sunrise;
+package com.r.travel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
