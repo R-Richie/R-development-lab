@@ -9,10 +9,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -29,14 +26,14 @@ public class FlowController {
 
 
 
-    @PostMapping(value = "/hotelFulfillment")
-    public void triggerHotelChannel() {
+    @GetMapping(value = "/hotelFulfillment")
+    public void triggerHotelChannel(@RequestParam String path) {
 
         Map<String, Object> headerMap = new HashMap<>();
 //        headerMap.put(HotelFlowConstants.SYNC_CALLBACK_PROVIDER, ProviderEnum.GREEN_CLOUD.getCode());
         MessageHeaders messageHeaders = new MessageHeaders(headerMap);
 
-        Message<String> message = MessageBuilder.createMessage("666", messageHeaders);
+        Message<String> message = MessageBuilder.createMessage(path, messageHeaders);
         hotelFulfillmentChannel.send(message);
 //        return GreenCloudResponseType.builder()
 //                .resultCode(0)
