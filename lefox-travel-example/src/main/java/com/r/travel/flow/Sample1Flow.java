@@ -2,7 +2,6 @@ package com.r.travel.flow;
 
 import com.r.travel.constants.MessageFlowConstants;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -14,13 +13,11 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static com.r.travel.constants.MessageFlowConstants.SPEL_HEADERS;
 @Slf4j
 @Component
-public class HotelFulfillmentFlow {
+public class Sample1Flow {
     @Bean("hotelFulfillmentChannel")
     public MessageChannel initChannel() {
         return MessageChannels.direct().get();
@@ -29,8 +26,8 @@ public class HotelFulfillmentFlow {
     public MessageChannel hotelOutChannel() {
         return MessageChannels.direct().get();
     }
-//    @Bean
-    public IntegrationFlow hotelFulfillmentSubFlowDefinition(IntegrationFlow defaultFlow,
+    @Bean
+    public IntegrationFlow sample1Definition(IntegrationFlow defaultFlow,
                                                              IntegrationFlow aFlow,
                                                              IntegrationFlow bFlow,
                                                              IntegrationFlow cFlow
@@ -51,8 +48,7 @@ public class HotelFulfillmentFlow {
     }
 
     @Bean
-    public IntegrationFlow hotelFulfillmentSubFlowDynamicDefinition(FlowRouterSpec flowRouterSpec) {
-        //业务幂等性判断
+    public IntegrationFlow sampleDynamicDefinition(FlowRouterSpec flowRouterSpec) {
         return IntegrationFlows.from("hotelFulfillmentChannel")
                 .enrichHeaders(h -> h.messageProcessor(payloadAddHeader("path")))
                 .route("headers['path']", flowRouterSpec.getRouterSpec())
@@ -63,7 +59,6 @@ public class HotelFulfillmentFlow {
 
     @Bean
     public IntegrationFlow defaultFlow(){
-        //构建入参-》创建售后单 -》返回值处理
         return f-> f
                 .handle((p,v)-> {
                     log.warn("注意！流程未找到正确分支，走到默认流程中");
