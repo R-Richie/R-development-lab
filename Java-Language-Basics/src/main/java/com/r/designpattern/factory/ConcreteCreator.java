@@ -1,7 +1,5 @@
 package com.r.designpattern.factory;
 
-import java.util.concurrent.ExecutionException;
-
 public class ConcreteCreator extends Creator{
     @Override
     public <T extends Product> T createProduct(Class<T> c) {
